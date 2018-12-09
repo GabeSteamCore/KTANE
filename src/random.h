@@ -5,7 +5,9 @@ void initRand(){
   srand((unsigned) time(NULL));
 }
 
-int roll(int max){
-  //srand(time(NULL));
-  return (rand() % max);
+/*
+Generates random integer numbers in range [min; max] included
+ */
+int roll(int min, int max){
+  return (rand() % (max+1-min))+min;
 }

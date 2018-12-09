@@ -1,10 +1,10 @@
-#include <stdio.h>
-#include <stdbool.h>
-#include <string.h>
 #include "bomb.h"
 
-void main(){
-  Bomb boom = generateBomb();
+int main(){
+    Bomb boom = generateBomb();
 
-  //printBomb(boom);
+    char *str = bombToString(boom);
+    printf("%s\n", str);
+    free(str);
+    return 0;
 }
