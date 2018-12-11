@@ -1,6 +1,7 @@
+#include "random.h"
 #include <stdbool.h>
 #include <string.h>
-#include "random.h"
+#include <stdlib.h>
 
 typedef struct SerialNum{
   char *c;
@@ -21,19 +22,11 @@ char *generateSerialString(){
     str[1] = roll(48, 57);
   }
 
-  //Generate number
-  str[2] = roll(48, 57);
-
-  //Generate upper case letter
-  str[3] = roll(65, 90);
-
-  //Generate upper case letter
-  str[4] = roll(65, 90);
-
-  //Generate number
-  str[5] = roll(48, 57);
-
-  str[6] = '\0';
+  str[2] = roll(48, 57);  //Generate number
+  str[3] = roll(65, 90);  //Generate upper case letter
+  str[4] = roll(65, 90);  //Generate upper case letter
+  str[5] = roll(48, 57);  //Generate number
+  str[6] = '\0';          //End of string
 
   return str;
 }
@@ -53,6 +46,7 @@ bool containsVowel(char s[]){
   return false;
 }
 
+// Ctor
 SerialNum generateSerialNum(){
   SerialNum ser;
   ser.c = generateSerialString();
@@ -62,6 +56,12 @@ SerialNum generateSerialNum(){
   return ser;
 }
 
+// Dtor
+void destoyBomb(){
+  //TODO
+}
+
+// Serializer
 char *serialnumToString(SerialNum ser){
   char *str = (char*)malloc(20);
   strcpy(str, ser.c);
