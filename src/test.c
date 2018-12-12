@@ -1,12 +1,16 @@
-#include "port.h"
-#include <stdio.h>
+#ifdef TEST
+//#include "port.h"
+//#include <stdio.h>
 
 //#define NB_PORTS 5
 
-void main(){
-  initRand();
-  Port *p = generatePorts();
+int main(){
+  /*initRand();
+  Port *p = generatePortArray();
 
   printf("Ports = %s\n", portArrayToString(p));
-  printf("\n");
+  printf("\n");*/
+  return 0;
 }
+
+#endif

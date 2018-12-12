@@ -1,3 +1,4 @@
+#ifdef false
 #include "module.h"
 #define HIGH 1
 #define LOW 0
@@ -24,3 +25,5 @@ void main(){
   //Solved loop
   while(1);
 }
+
+#endif

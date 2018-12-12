@@ -15,8 +15,12 @@ typedef enum Port{
   STEREORCA
 }Port;
 
-// Ctor
-Port *generatePorts(){
+// Ctors
+Port generatePort(){
+  return roll(1,6);
+}
+
+Port *generatePortArray(){
   Port *p = (Port*)malloc(NB_PORTS*sizeof(Port));
   Port tmp = 0;
   int first = 0;
@@ -28,7 +32,7 @@ Port *generatePorts(){
   }
 
   for(int i=0; i<NB_PORTS; i++){
-    tmp = roll(1,6);
+    tmp = generatePort();
 
     for (int j=NB_PORTS-1; j>=0; j--){
       if(p[j] == tmp){ //Is tmp in array
@@ -80,7 +84,7 @@ char *portArrayToString(Port *p){
 
   strcpy(portsStr,"");
 
-  while((p[i] != 0)&&(i<5)){
+  while((p[i] != 0)&&(i<NB_PORTS)){
     strcat(portsStr, portToString(p[i]));
     strcat(portsStr, "; ");
     i++;

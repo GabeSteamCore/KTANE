@@ -1,8 +1,8 @@
-#include <time.h>
-#include <stdlib.h>
-
 #ifndef RANDOM
 #define RANDOM
+
+#include <stdlib.h>
+#include <time.h>
 
 void initRand(){
   srand((unsigned) time(NULL));

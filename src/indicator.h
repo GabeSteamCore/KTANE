@@ -1,7 +1,13 @@
+#ifdef false
+
 #include "random.h"
 #include <string.h>
 #include <stdlib.h>
 
+#define PROBA_NULL_INDICATOR 50
+#define NB_INDICATORS 10
+
+// Definitions
 typedef enum Label{
   SND,
   CLR,
@@ -16,33 +22,43 @@ typedef enum Label{
   FRK
 }Label;
 
-typedef enum Led{
-  ON,
-  OFF
-}Led;
-
 typedef struct Indicator{
   Label label;
-  Led led;
+  bool led;
 }Indicator;
 
+// Ctors
 Label generateLabel(){
-  Label l = roll(10);
-  return l;
+  Label lab = roll(0, 10);
+  return lab;
 }
 
-Led generateLed(){
-  Led l = roll(1);
-  return l;
+bool generateLed(){
+  bool led = roll(0, 1);
+  return led;
 }
 
-Indicator generateIndicator(){
-  Indicator i;
-  i.label = generateLabel();
-  i.led = generateLed();
+Indicator *generateIndicator(){
+  Indicator *i = (Indicator *)malloc(sizeof(Indicator));
+  i->label = generateLabel();
+  i->led = generateLed();
   return i;
 }
 
+Indicator *generateIndicatorArray(){
+  Indicator *ind = (Indicator *)malloc(NB_INDICATORS*sizeof(Indicator));
+
+  for(int i=0; i<NB_INDICATORS; i++){
+    if(roll(1,100)<PROBA_NULL_INDICATOR){
+      ind[i] = generateIndicator();
+    }else{
+      ind[i] = NULL;
+    }
+  }
+  return i;
+}
+
+// Serializers
 char *labelToString(Label l){
   switch(l){
     case SND:
@@ -72,23 +88,32 @@ char *labelToString(Label l){
   }
 }
 
-char *ledToString(Led l){
-  switch (l){
-    case ON:
-      return "ON";
-    case OFF:
-      return "OFF";
-    default :
-      return "ERR_LED";
+char *ledToString(Indicator i){
+  switch (i.led){
+    case false:
+      return "Off"
+    case true:
+      return "On"
+    default:
+      return "LED_ERROR"
   }
 }
 
+// Serializers
 char *indicatorToString(Indicator i){
-  char *s = (char *) malloc(8);
-  char *led = ledToString(i.led);
-  char *label = labelToString(i.label);
-  strcpy(s, led);
-  strcat(s, ";");
-  strcat(s, label);
-  return s;
+  char *str = (char *) malloc(13);
+  char *ledstr = ledToString(i.led);
+  char *labelstr = labelToString(i.label);
+  strcpy(str, ledstr);
+  strcat(str, ";");
+  strcat(str, labelstr);
+  return str;
 }
+
+char *indicatorArrayToString(Indicator *i){
+  char *str = (char *)malloc(10);
+  strcpy(str, "");
+  return str;
+}
+
+#endif

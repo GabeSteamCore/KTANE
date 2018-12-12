@@ -1,21 +1,14 @@
 #include "serialnum.h"
 #include "port.h"
-//#include "time.h"
-//#include "indicator.h"
-//#include "battery.h"
-//#include "module.h"
-//#include "strikes.h"
 #include <stdbool.h>
 #include <stdio.h>
 
-//#define PROBA_NULL_INDICATOR 50
-//#define NB_INDICATORS 10
 //#define NB_BATTERIES 2
 
 typedef struct Bomb{
   SerialNum serialnum;
   Port *ports;
-  //Indicator indicators[NB_INDICATORS];
+  //Indicator *indicators;
   //Batteries batteries[NB_BATTERIES];
   //Module modules[11];
   //Time timer;
@@ -43,7 +36,7 @@ Bomb generateBomb(){
   Bomb b;
 
   b.serialnum = generateSerialNum();
-  b.ports = generatePorts();
+  b.ports = generatePortArray();
 
   // Generate Indicators
   //strncpy(b.indicators, generateIndicatorsArray());
