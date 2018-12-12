@@ -1,10 +1,6 @@
 #include "bomb.h"
 
 int main(){
-    Bomb boom = generateBomb();
-
-    char *str = bombToString(boom);
-    printf("%s\n", str);
-    free(str);
+    printf("%s\n", bombToString(generateBomb()));
     return 0;
 }

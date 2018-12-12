@@ -1,11 +1,10 @@
-#ifdef false
-
 #include "random.h"
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #define PROBA_NULL_INDICATOR 50
-#define NB_INDICATORS 10
+#define NB_INDICATORS 5
 
 // Definitions
 typedef enum Label{
@@ -39,15 +38,15 @@ bool generateLed(){
 }
 
 Indicator *generateIndicator(){
-  Indicator *i = (Indicator *)malloc(sizeof(Indicator));
-  i->label = generateLabel();
-  i->led = generateLed();
-  return i;
+  Indicator *ind = (Indicator *)malloc(sizeof(Indicator));
+  ind->label = generateLabel();
+  ind->led = generateLed();
+  return ind;
 }
 
-Indicator *generateIndicatorArray(){
-  Indicator *ind = (Indicator *)malloc(NB_INDICATORS*sizeof(Indicator));
-
+Indicator **generateIndicatorArray(){
+  Indicator **ind = (Indicator **)malloc(NB_INDICATORS*sizeof(Indicator));
+  initRand();
   for(int i=0; i<NB_INDICATORS; i++){
     if(roll(1,100)<PROBA_NULL_INDICATOR){
       ind[i] = generateIndicator();
@@ -55,7 +54,7 @@ Indicator *generateIndicatorArray(){
       ind[i] = NULL;
     }
   }
-  return i;
+  return ind;
 }
 
 // Serializers
@@ -88,32 +87,38 @@ char *labelToString(Label l){
   }
 }
 
-char *ledToString(Indicator i){
-  switch (i.led){
-    case false:
-      return "Off"
-    case true:
-      return "On"
-    default:
-      return "LED_ERROR"
+char *ledToString(bool led){
+  if (led){
+    return "On";
+  }else{
+    return "Off";
   }
 }
 
 // Serializers
-char *indicatorToString(Indicator i){
+char *indicatorToString(Indicator *ind){
   char *str = (char *) malloc(13);
-  char *ledstr = ledToString(i.led);
-  char *labelstr = labelToString(i.label);
+  char *ledstr = ledToString(ind->led);
+  char *labelstr = labelToString(ind->label);
+
   strcpy(str, ledstr);
   strcat(str, ";");
   strcat(str, labelstr);
+
   return str;
 }
 
-char *indicatorArrayToString(Indicator *i){
+char *indicatorArrayToString(Indicator **ind){
   char *str = (char *)malloc(10);
   strcpy(str, "");
+
+  for (int i=0; i<NB_INDICATORS; i++){
+    if (ind[i]){
+      strcat(str, "[");
+      strcat(str, indicatorToString(ind[i]));
+      strcat(str, "]; ");
+    }
+  }
+
   return str;
 }
-
-#endif

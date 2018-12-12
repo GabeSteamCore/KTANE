@@ -26,6 +26,8 @@ Port *generatePortArray(){
   int first = 0;
   bool found = false;
 
+  initRand();
+
   //Initialize array
   for (int i=0; i<NB_PORTS; i++){
     p[i]=0;

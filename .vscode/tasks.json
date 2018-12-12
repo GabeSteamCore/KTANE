@@ -49,6 +49,9 @@
             "args": [
                 "-c",
                 "mingw32-make clean"
+            ],
+            "problemMatcher": [
+                "$gcc"
             ]
         }
     ]

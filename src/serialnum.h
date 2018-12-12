@@ -49,6 +49,7 @@ bool containsVowel(char s[]){
 // Ctor
 SerialNum generateSerialNum(){
   SerialNum ser;
+  initRand();
   ser.c = generateSerialString();
   ser.isLastDigitOdd = isOdd(ser.c[5]);
   ser.containsVowel = containsVowel(ser.c);
