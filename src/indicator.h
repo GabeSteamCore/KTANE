@@ -4,7 +4,7 @@
 #include <stdbool.h>
 
 #define PROBA_NULL_INDICATOR 50
-#define NB_INDICATORS 5
+#define NB_INDICATORS 2
 
 // Definitions
 typedef enum Label{
@@ -97,7 +97,7 @@ char *ledToString(bool led){
 
 // Serializers
 char *indicatorToString(Indicator *ind){
-  char *str = (char *) malloc(13);
+  char *str = (char *) malloc(8);
   char *ledstr = ledToString(ind->led);
   char *labelstr = labelToString(ind->label);
 
@@ -109,7 +109,7 @@ char *indicatorToString(Indicator *ind){
 }
 
 char *indicatorArrayToString(Indicator **ind){
-  char *str = (char *)malloc(10);
+  char *str = (char *)malloc(11*NB_INDICATORS+1);
   strcpy(str, "");
 
   for (int i=0; i<NB_INDICATORS; i++){
@@ -119,6 +119,8 @@ char *indicatorArrayToString(Indicator **ind){
       strcat(str, "]; ");
     }
   }
-
   return str;
 }
+
+// Indicator
+//2, 2, 1, 1, 2, 0, 1

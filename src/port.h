@@ -6,7 +6,7 @@
 #define NB_PORTS 5
 
 typedef enum Port{
-  NONE,
+  NOP,
   PS2,
   RJ45,
   DVID,
@@ -61,7 +61,7 @@ void destoyPorts(Port *p){
 // Serializers
 char *portToString(Port p){
   switch(p){
-    case NONE:
+    case NOP:
       return NULL;
     case DVID:
       return "DVI-D";
@@ -96,7 +96,6 @@ char *portArrayToString(Port *p){
 }
 
 /* Exemples
-RJ45 DVI RCA Serial PS2
-Parallel Serial
+[Parallel PS2 RCA RJ45] [PS2 RJ45] [Serial] []
 
 */
