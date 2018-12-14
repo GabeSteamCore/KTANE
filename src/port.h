@@ -81,7 +81,7 @@ char *portToString(Port p){
 }
 
 char *portArrayToString(Port *p){
-  char *portsStr = (char*)malloc(95);
+  char *portsStr = (char*)malloc(NB_PORTS*12+1);
   int i=0;
 
   strcpy(portsStr,"");

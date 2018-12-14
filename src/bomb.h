@@ -5,7 +5,6 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-//#define NB_BATTERIES 2
 
 typedef struct Bomb{
   SerialNum serialnum;
@@ -25,9 +24,8 @@ Bomb generateBomb(){
   b.ports = generatePortArray();
   b.batteries = generateBatteriesArray();
   b.indicators = generateIndicatorArray();
-  //b.timer = generateTimer();
   //b.modules = set();
-  //b.batteries = set();
+  //b.timer = generateTimer(); 
   //b.strikes = generateStrikes(int difficulty, int ...);
   return b;
 }

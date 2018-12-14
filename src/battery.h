@@ -15,8 +15,6 @@ typedef enum Battery{
 
 // Ctor
 Battery generateBattery(){
-  //int r = ;
-  //printf("generateBattery : %d\n", r);
   return roll(1,2);
 }
 
@@ -55,7 +53,7 @@ char *batteryToString(Battery bat){
     case D:
       return "D";
     default:
-      return "Battery_ERROR";
+      return "B_ERR";
   }
 }
 
