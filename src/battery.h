@@ -1,6 +1,7 @@
 #include "random.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 #define PROBA_NULL_BATTERY 50
 #define NB_BATTERIES 4
@@ -13,31 +14,42 @@ typedef enum Battery{
 }Battery;
 
 // Ctor
+Battery generateBattery(){
+  //int r = ;
+  //printf("generateBattery : %d\n", r);
+  return roll(1,2);
+}
+
 Battery *generateBatteriesArray(){
   Battery *bat = (Battery *)malloc(NB_BATTERIES*sizeof(Battery));
+  int j=0;
 
   initRand();
 
+  //Initialize array
+  for (int i=0; i<NB_BATTERIES; i++){
+    bat[i]=0;
+  }
+
   for(int i=0; i<NB_BATTERIES; i++){
     if(roll(1,100)<PROBA_NULL_BATTERY){
-      bat[i] = roll(1,2);
-    }else{
-      bat[i] = 0;
+      bat[j] = generateBattery();
+      j++;
     }
   }
   return bat;
 }
 
 // Dtor
-/*void destroyBatteryArray(){
-
-}*/
+void destroyBatteryArray(Battery *bat){
+  free(bat);
+}
 
 // Serializers
 char *batteryToString(Battery bat){
   switch (bat){
     case NOB:
-      return "";
+      return NULL;
     case AA:
       return "AA";
     case D:
@@ -48,16 +60,18 @@ char *batteryToString(Battery bat){
 }
 
 char *batteryArrayToString(Battery *bat){
-  char *str = (char *)malloc(5*NB_BATTERIES+1);
-  strcpy(str, "");
+  char *batStr = (char *)malloc(5*NB_BATTERIES+1);
+  int i=0;
 
-  for (int i=0; i<NB_BATTERIES; i++){
-    if (bat[i]){
-      strcat(str, batteryToString(bat[i]));
-      strcat(str, "; ");
-    }
+  strcpy(batStr, "");
+
+  while((bat[i] != 0) && (i<NB_BATTERIES)){
+    strcat(batStr, batteryToString(bat[i]));
+    strcat(batStr, "; ");
+    i++;
   }
-  return str;
+
+  return batStr;
 }
 
 //Batteries

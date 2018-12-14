@@ -1,7 +1,7 @@
 #include "bomb.h"
 
 int main(){
-    //printf("%s\n", bombToString(generateBomb()));
-    printf("%s\n", batteryArrayToString(generateBatteriesArray));
+    printf("%s\n", bombToString(generateBomb()));
+    
     return 0;
 }
