@@ -1,3 +1,4 @@
+// Definitions
 typedef enum ModuleType{
   NEEDY,
   STATIC

@@ -1,12 +1,6 @@
-#include <stdbool.h>
-
-typedef enum Difficulty{
-  Hard,
-  Normal,
-  Easy
-}Difficulty;
+#include "difficulty.h"
 
 typedef struct Strikes{
   int failures;
-  Difficulty difficulty;
+  Difficulty dif;
 }Strikes;

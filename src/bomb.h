@@ -2,22 +2,23 @@
 #include "port.h"
 #include "indicator.h"
 #include "battery.h"
+#include "timer.h"
+#include "difficulty.h"
 #include <stdbool.h>
 #include <stdio.h>
-
 
 typedef struct Bomb{
   SerialNum serialnum;
   Port *ports;
   Battery *batteries;
   Indicator **indicators;
-  //Module modules[11];
-  //Time timer;
+  //Module *modules;
+  Timer *timer;
   //Strikes strikes;
 }Bomb;
 
 // Ctor
-Bomb generateBomb(){
+Bomb generateBomb(Difficulty lvl, int nMods){
   Bomb b;
 
   b.serialnum = generateSerialNum();
@@ -25,7 +26,7 @@ Bomb generateBomb(){
   b.batteries = generateBatteriesArray();
   b.indicators = generateIndicatorArray();
   //b.modules = set();
-  //b.timer = generateTimer(); 
+  b.timer = generateTimer(lvl, nMods); //TODO : use correct parameters 
   //b.strikes = generateStrikes(int difficulty, int ...);
   return b;
 }
@@ -38,7 +39,7 @@ Bomb generateBomb(){
 
 //Serializer
 char *bombToString(Bomb b){
-    char *str = (char*)malloc(187); //TODO ajust malloc
+    char *str = (char*)malloc(203); //TODO ajust malloc
     strcpy(str, "Bomb :\n"); //+7
     strcat(str, "  Serial# : "); //+12
     strcat(str, serialnumToString(b.serialnum)); //+19 (max)
@@ -51,6 +52,9 @@ char *bombToString(Bomb b){
     strcat(str, "\n"); //+1
     strcat(str, "  Indicators : "); //+15
     strcat(str, indicatorArrayToString(b.indicators)); //+35 (max)
+    strcat(str, "\n"); //+1
+    strcat(str, "  Timer : "); //+10
+    strcat(str, timerToString(b.timer)); //+4
     strcat(str, "\n"); //+1
 
     return str;
