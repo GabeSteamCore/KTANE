@@ -1,4 +1,4 @@
-#include "random.h"
+#include "../../SharedDependancies/random.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -38,7 +38,7 @@ char *moduleToString(Module *mod){
 
   strcpy(modStr, "");
   
-  if(mod->solved == true){
+  if(mod->solved){
     strcat(modStr, "Solved");
   }else{
     strcat(modStr, "Unsolved");

@@ -1,5 +1,5 @@
 #include "difficulty.h"
-#include "utility.h"
+#include "../../SharedDependancies/utility.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
