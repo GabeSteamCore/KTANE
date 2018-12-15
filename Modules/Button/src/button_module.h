@@ -14,6 +14,7 @@ typedef enum ButtonLabel{
 }ButtonLabel;
 
 typedef struct Button{
+    bool successLED;
     bool pressed;
     Color stripColor;
     Color buttonColor;
@@ -29,19 +30,20 @@ ButtonLabel generateButtonLabel(){
     return roll(0,3);
 }
 
-Button *generateButton(){
-    Button *butt = (Button *)malloc(sizeof(Button));
+Button generateButton(){
+    Button butt;
 
     initRand();
-
-    butt->pressed = false;
-    butt->stripColor = generateColor();
-    butt->buttonColor = generateColor();
-    butt->label = generateButtonLabel();
+    butt.successLED = false;
+    butt.pressed = false;
+    butt.stripColor = generateColor();
+    butt.buttonColor = generateColor();
+    butt.label = generateButtonLabel();
     return butt;
 }
 
 // Dtor
+// TODO
 
 // Serializer
 char *buttonLabelToString(ButtonLabel bl){
@@ -59,23 +61,30 @@ char *buttonLabelToString(ButtonLabel bl){
     }
 }
 
-char *buttonToString(Button *butt){
+char *buttonToString(Button butt){
     char *bStr = (char *)malloc(50);
     char *tmp = (char *)malloc(15);
 
-    sprintf(tmp, "pressed: %d; ", butt->pressed); //12
+    sprintf(tmp, "pressed: %d; ", butt.pressed); //12
     strcpy(bStr, tmp);
 
-    sprintf(tmp, "%s ", colorToString(butt->buttonColor)); //14
+    sprintf(tmp, "%s ", colorToString(butt.buttonColor)); //14
     strcat(bStr, tmp);
 
-    sprintf(tmp, "\"%s\" button; ", buttonLabelToString(butt->label)); //9
+    sprintf(tmp, "\"%s\" button; ", buttonLabelToString(butt.label)); //9
     strcat(bStr, tmp);
 
-    sprintf(tmp, "%s strip; ", colorToString(butt->stripColor)); //13
+    sprintf(tmp, "%s strip; ", colorToString(butt.stripColor)); //13
     strcat(bStr, tmp);
 
     return bStr;
+}
+
+// Display
+void displayButton(Button *butt){
+    // TODO
+    // Switch on LEDs + Set colors + ...
+    printf("%s\n", buttonToString(butt));
 }
 
 // "Detonate"   >1 bat.     Press/Release
