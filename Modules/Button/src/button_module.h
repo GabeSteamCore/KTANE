@@ -77,3 +77,11 @@ char *buttonToString(Button *butt){
 
     return bStr;
 }
+
+// "Detonate"   >1 bat.     Press/Release
+// lit.FRK      >2 bat.     Press/Release
+// Red          "Hold"      Press/Release
+// --Else--                 Hold
+//                          Blue    4
+//                          Yellow  5
+//                          -Else-  1
