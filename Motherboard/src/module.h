@@ -38,7 +38,7 @@ char *moduleToString(Module *mod){
 
   strcpy(modStr, "");
   
-  if(mod->solved == true){
+  if(mod->solved){
     strcat(modStr, "Solved");
   }else{
     strcat(modStr, "Unsolved");
